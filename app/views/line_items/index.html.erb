@@ -1,0 +1,19 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Line items</h1>
+
+<div id="line_items">
+  <% @line_items.each do |line_item| %>
+    <%= render line_item %>
+    <p>
+      <%= link_to "Show this line item", line_item %>
+    </p>
+  <% end %>
+</div>
+
+  <%= form_with(model: @order) do |form| %>
+    <%= form.hidden_field :line_item_ids, value: current_user.cart.line_items.pluck(:id) %>
+    <div>
+      <%= form.submit 'Place Order' %>
+    </div>
+  <% end %> 
